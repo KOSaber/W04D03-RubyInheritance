@@ -271,34 +271,28 @@ area = num_sides * length * length / (4 * tangent(PI/num_sides))
 - Instances of Square should respond to the `#calculate_area` method and give the correct result.
 
 ```rb
-class Shap
-attr_read :num_sides
-attr_accessor :side_length
-attr_accessor :color
+class Shape
+  attr_reader :num_sides
+  attr_accessor :side_length
+  attr_accessor :color
+   def initialize(num_sides, side_length)
+  @num_sides, @side_length = num_sides, side_length
+  @area=0
+  end
+  def calculate_area
+  @area = (@num_sides * @side_length * @side_length) / (4 * Math.tan(Math::PI/@num_sides))
 
- def initialize(num_sides, side_length)
-@num_sides, @side_length = num_sides, side_length
-@area=0
-end
-
-def calculate_area
-@area = @num_sides * @side_length * @side_length / (4 * tangent(PI/@num_sides))
-return @area
-end
-end
-
-class Rectangle < Shap
-
-end
-
-class Square < Rectangle
-
-end
-
-s = Shape.new(4, 4)
-s.calculate_area
-p Rectangle.new(3, 4).calculate_area
-Square.new(4)
+  return @area
+  end
+  end
+  class Rectangle < Shape
+  end
+  class Square < Rectangle
+  end
+  s = Shape.new(4, 4)
+  s.calculate_area
+  p Rectangle.new(3, 4).calculate_area
+  Square.new(4)
 ```
  ------------
 
