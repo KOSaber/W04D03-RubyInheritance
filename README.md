@@ -50,6 +50,43 @@ cat.speak # "meow"
 - Create a class named `Vehicle` which has a method named `start` that `puts "Engine is on!`.
 - Create a class named `SpaceShip` which inherits from `Vehicle` and has a method named `fly` which puts `Up up and away!`.
 - Create a class named `Car` which inherits from `Vehicle` and has a method named `drive` which puts `Vroom!`.
+```rb
+
+
+
+class Vehicle 
+
+def start
+puts "Engine is on!."
+end
+
+end
+
+class SpaceShip < Vehicle 
+ 
+ def fly
+puts "Up up and away!."
+ end 
+end
+
+class Car < Vehicle 
+ 
+ def drive
+puts "Vroom!."
+ end 
+end
+
+try = SpaceShip.new
+try.fly
+try.start
+
+try2 = Car.new
+try2.start
+try2.drive
+
+```
+
+
 
 ## Ruby: Super Inheritance
 
@@ -86,7 +123,36 @@ fish.move
 - Add a method named `move` to your `Vehicle` class that returns `Here we go `.
 - Rename your `fly` method in your `SpaceShip` to `move` and use `super` so that it prints `Here we go Up up and away!`.
 - Rename your `drive` method in your `Car` to `move` and use `super` so that it prints `Here we go Vroom!`.
+```rb
 
+class Vehicle 
+
+def start
+"Engine is on!."
+end
+
+end
+
+class SpaceShip < Vehicle 
+ 
+ def start
+puts super + "Up up and away!."
+ end 
+end
+
+class Car < Vehicle 
+ 
+ def start
+puts super + "Vroom!."
+ end 
+end
+
+try = SpaceShip.new
+try.start
+
+try2 = Car.new
+try2.start
+```
 
 ## Mixins
 
@@ -159,6 +225,18 @@ Please diagram the method lookup chain using the following requirements:
 - Diagram how Ruby finds and executes the methods called on  `FamilyFeud`
 
 ```rb
+class TVShow 
+def roll_credits
+puts "im in roll"
+end
+end
+
+class FamilyFeud < TVShow
+def fast_money
+puts "im in fast money"
+end
+end
+
 steve_harvey_family_feud = FamilyFeud.new
 steve_harvey_family_feud.fast_money
 steve_harvey_family_feud.roll_credits
@@ -192,7 +270,36 @@ area = num_sides * length * length / (4 * tangent(PI/num_sides))
 - Squares should be instantiated with `Square.new(4)` to create a square with all sides equal to 4.
 - Instances of Square should respond to the `#calculate_area` method and give the correct result.
 
+```rb
+class Shap
+attr_read :num_sides
+attr_accessor :side_length
+attr_accessor :color
 
+ def initialize(num_sides, side_length)
+@num_sides, @side_length = num_sides, side_length
+@area=0
+end
+
+def calculate_area
+@area = @num_sides * @side_length * @side_length / (4 * tangent(PI/@num_sides))
+return @area
+end
+end
+
+class Rectangle < Shap
+
+end
+
+class Square < Rectangle
+
+end
+
+s = Shape.new(4, 4)
+s.calculate_area
+p Rectangle.new(3, 4).calculate_area
+Square.new(4)
+```
  ------------
 
 
